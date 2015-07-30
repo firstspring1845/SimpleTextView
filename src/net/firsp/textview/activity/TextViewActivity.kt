@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.widget.ListView
 import net.firsp.textview.R
 import net.firsp.textview.Util
@@ -27,7 +28,7 @@ class TextViewActivity() : ListViewActivity(){
 
     fun readFile() : Array<String> {
         return try{
-            val encode = getSharedPreferences("encode", Context.MODE_PRIVATE).getString("encode", "UTF-8")
+            val encode = PreferenceManager.getDefaultSharedPreferences(this).getString("encode", "UTF-8")
             BufferedReader(InputStreamReader(FileInputStream(getIntent().getStringExtra("file")), encode)).use{
                 val l = linkedListOf<String>()
                 var s = it.readLine()

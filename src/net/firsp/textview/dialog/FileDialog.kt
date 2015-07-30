@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.app.DialogFragment
 import android.content.Context
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import net.firsp.textview.activity.ListViewActivity
@@ -20,7 +21,7 @@ class FileDialog() : DialogFragment(){
         val v = ListView(getActivity())
         val c = arrayOf(
                 Command("Set Background Image", {
-                    val e = a.getSharedPreferences("config", Context.MODE_PRIVATE).edit()
+                    val e = PreferenceManager.getDefaultSharedPreferences(a).edit()
                     e.putString("background", p)
                     e.commit()
                     a.setBackgroundImage(p)

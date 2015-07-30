@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
 import android.os.Looper
+import android.preference.PreferenceManager
 import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
@@ -103,7 +104,7 @@ class FileListActivity() : ListViewActivity(), AdapterView.OnItemClickListener, 
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        val e = getSharedPreferences("encode", Context.MODE_PRIVATE).edit()
+        val e = PreferenceManager.getDefaultSharedPreferences(this).edit()
         if (item != null) {
             when (item.getGroupId()) {
                 0 -> when (item.getItemId()) {

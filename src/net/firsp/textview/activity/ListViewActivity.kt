@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.widget.ListView
 import net.firsp.textview.R
 import net.firsp.textview.Util
@@ -19,7 +20,7 @@ abstract class ListViewActivity() : Activity(){
     }
 
     override fun onWindowFocusChanged(has:Boolean) {
-        setBackgroundImage(getSharedPreferences("config", Context.MODE_PRIVATE).getString("background", ""))
+        setBackgroundImage(PreferenceManager.getDefaultSharedPreferences(this).getString("background", ""))
     }
 
     fun setBackgroundImage(path:String){
