@@ -22,6 +22,7 @@ import net.firsp.textview.dialog.FileDialog
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
+
 class FileListActivity() : ListViewActivity(), AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     val adapter = FileListAdapter(this)
@@ -31,17 +32,17 @@ class FileListActivity() : ListViewActivity(), AdapterView.OnItemClickListener, 
         val ue = Thread.getDefaultUncaughtExceptionHandler()
         Thread.setDefaultUncaughtExceptionHandler { t, e ->
             val f = File(getExternalFilesDir(null), "exception.txt")
-            try{
-                BufferedWriter(FileWriter(f, true)).use{
+            try {
+                BufferedWriter(FileWriter(f, true)).use {
                     it.write(e.toString())
                     it.newLine()
-                    e.getStackTrace().forEach {el ->
+                    e.getStackTrace().forEach { el ->
                         it.write(el.toString())
                         it.newLine()
                     }
                 }
-            }catch(e:Exception){
-                android.util.Log.d("hoge","hoge~~")
+            } catch(e: Exception) {
+                android.util.Log.d("hoge", "hoge~~")
             }
             ue.uncaughtException(t, e)
         }
@@ -50,7 +51,6 @@ class FileListActivity() : ListViewActivity(), AdapterView.OnItemClickListener, 
         v.setOnItemClickListener(this)
         v.setOnItemLongClickListener(this)
     }
-
 
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -91,25 +91,27 @@ class FileListActivity() : ListViewActivity(), AdapterView.OnItemClickListener, 
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        if(menu != null){
-            val encodeMenu = menu.addSubMenu(0, 1, 1, "Encode")
-            encodeMenu.add(0, 2, 2, "UTF-8")
-            val ja = encodeMenu.addSubMenu(0, 3, 3, "Japanese")
-            ja.add(0, 4, 4, "EUC-JP")
-            ja.add(0, 5, 5, "ShiftJIS")
-            ja.add(0, 6, 6, "ISO-2022-JP")
+        if (menu != null) {
+            val encodeMenu = menu.addSubMenu(0, 1024, 0, "Encode")
+            encodeMenu.add(0, 0, 0, "UTF-8")
+            val ja = encodeMenu.addSubMenu(0, 1025, 1, "Japanese")
+            ja.add(0, 1, 0, "EUC-JP")
+            ja.add(0, 2, 1, "ShiftJIS")
+            ja.add(0, 3, 2, "ISO-2022-JP")
         }
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         val e = getSharedPreferences("encode", Context.MODE_PRIVATE).edit()
-        if(item != null){
-            when(item.getItemId()){
-                1 -> e.putString("encode", "UTF-8")
-                4 -> e.putString("encode", "EUC_JP")
-                5 -> e.putString("encode", "SJIS")
-                6 -> e.putString("encode", "ISO2022JP")
+        if (item != null) {
+            when (item.getGroupId()) {
+                0 -> when (item.getItemId()) {
+                    0 -> e.putString("encode", "UTF-8")
+                    1 -> e.putString("encode", "EUC_JP")
+                    2 -> e.putString("encode", "SJIS")
+                    3 -> e.putString("encode", "ISO2022JP")
+                }
             }
         }
         e.commit()
