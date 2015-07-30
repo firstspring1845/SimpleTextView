@@ -10,6 +10,8 @@ import android.os.Environment
 import android.os.Handler
 import android.os.Looper
 import android.view.KeyEvent
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
@@ -20,7 +22,6 @@ import net.firsp.textview.dialog.FileDialog
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
-
 class FileListActivity() : ListViewActivity(), AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     val adapter = FileListAdapter(this)
@@ -88,4 +89,31 @@ class FileListActivity() : ListViewActivity(), AdapterView.OnItemClickListener, 
         }
         return super<ListViewActivity>.onKeyDown(keyCode, event)
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        if(menu != null){
+            val encodeMenu = menu.addSubMenu(0, 1, 1, "Encode")
+            encodeMenu.add(0, 2, 2, "UTF-8")
+            val ja = encodeMenu.addSubMenu(0, 3, 3, "Japanese")
+            ja.add(0, 4, 4, "EUC-JP")
+            ja.add(0, 5, 5, "ShiftJIS")
+            ja.add(0, 6, 6, "ISO-2022-JP")
+        }
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val e = getSharedPreferences("encode", Context.MODE_PRIVATE).edit()
+        if(item != null){
+            when(item.getItemId()){
+                1 -> e.putString("encode", "UTF-8")
+                4 -> e.putString("encode", "EUC_JP")
+                5 -> e.putString("encode", "SJIS")
+                6 -> e.putString("encode", "ISO2022JP")
+            }
+        }
+        e.commit()
+        return true
+    }
 }
+

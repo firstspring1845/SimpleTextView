@@ -9,7 +9,9 @@ import net.firsp.textview.R
 import net.firsp.textview.Util
 import net.firsp.textview.adapter.TextViewAdapter
 import java.io.BufferedReader
+import java.io.FileInputStream
 import java.io.FileReader
+import java.io.InputStreamReader
 
 class TextViewActivity() : ListViewActivity(){
 
@@ -25,7 +27,8 @@ class TextViewActivity() : ListViewActivity(){
 
     fun readFile() : Array<String> {
         return try{
-            BufferedReader(FileReader(getIntent().getStringExtra("file"))).use{
+            val encode = getSharedPreferences("encode", Context.MODE_PRIVATE).getString("encode", "UTF-8")
+            BufferedReader(InputStreamReader(FileInputStream(getIntent().getStringExtra("file")), encode)).use{
                 val l = linkedListOf<String>()
                 var s = it.readLine()
                 while(s != null){
