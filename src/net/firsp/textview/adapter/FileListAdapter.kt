@@ -9,7 +9,7 @@ import android.widget.TextView
 import java.io.File
 import java.util.*
 
-class FileListAdapter(val activity: Activity) : BaseAdapter(), AdapterView.OnItemClickListener{
+class FileListAdapter(val activity: Activity) : BaseAdapter(){
 
     var currentDir = File("/")
     var currentFiles = currentDir.listFiles()
@@ -47,16 +47,4 @@ class FileListAdapter(val activity: Activity) : BaseAdapter(), AdapterView.OnIte
 
     override fun getCount() = currentFiles.size()
 
-    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        val f = getItem(position)
-        when {
-            f.isDirectory() ->{
-                setDirectory(f)
-                parent!!.setSelection(0)
-            }
-            f.isFile() -> {
-
-            }
-        }
-    }
 }
