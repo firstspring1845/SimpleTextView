@@ -11,9 +11,15 @@ import java.util.*
 
 class FileListAdapter(val activity: Activity) : BaseAdapter(){
 
-    var currentDir = File("/")
-    var currentFiles = currentDir.listFiles()
-    val empty = Array<File>(0, {File("")})
+    val empty = arrayOf<File>()
+
+    var currentDir = File("")
+    var currentFiles = empty
+
+    init {
+        setDirectory(File("/"))
+    }
+
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
         val f = getItem(position)
@@ -40,6 +46,8 @@ class FileListAdapter(val activity: Activity) : BaseAdapter(){
 
         }
     }
+
+
 
     override fun getItem(position: Int) = currentFiles[position]
 
