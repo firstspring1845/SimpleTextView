@@ -19,6 +19,7 @@ import android.widget.ListView
 import net.firsp.textview.R
 import net.firsp.textview.Util
 import net.firsp.textview.adapter.FileListAdapter
+import net.firsp.textview.dialog.FavDialog
 import net.firsp.textview.dialog.FileDialog
 import java.io.BufferedWriter
 import java.io.File
@@ -95,10 +96,11 @@ class FileListActivity() : ListViewActivity(), AdapterView.OnItemClickListener, 
         if (menu != null) {
             val encodeMenu = menu.addSubMenu(0, 1024, 0, "Encode")
             encodeMenu.add(0, 0, 0, "UTF-8")
-            val ja = encodeMenu.addSubMenu(0, 1025, 1, "Japanese")
+            val ja = encodeMenu.addSubMenu(0, 1025, 0, "Japanese")
             ja.add(0, 1, 0, "EUC-JP")
             ja.add(0, 2, 1, "ShiftJIS")
             ja.add(0, 3, 2, "ISO-2022-JP")
+            menu.add(1, 0, 1, "Bookmark")
         }
         return true
     }
@@ -113,10 +115,12 @@ class FileListActivity() : ListViewActivity(), AdapterView.OnItemClickListener, 
                     2 -> e.putString("encode", "SJIS")
                     3 -> e.putString("encode", "ISO2022JP")
                 }
+                1 -> FavDialog().show(getFragmentManager(), "Fav")
             }
         }
         e.commit()
         return true
     }
 }
+
 
