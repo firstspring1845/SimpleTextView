@@ -12,7 +12,7 @@ import net.firsp.textview.activity.ListViewActivity
 import net.firsp.textview.util.Command
 import java.io.File
 
-class FileDialog() : DialogFragment(){
+class FileDialog() : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog? {
         val a = getActivity() as ListViewActivity
@@ -32,8 +32,8 @@ class FileDialog() : DialogFragment(){
         v.setAdapter(ArrayAdapter(a, android.R.layout.simple_list_item_1, c))
 
         val d = AlertDialog.Builder(getActivity())
-        .setView(v)
-        .create()
+                .setView(v)
+                .create()
 
         v.setOnItemClickListener { adapterView, view, i, l ->
             (adapterView.getItemAtPosition(i) as Command).run()

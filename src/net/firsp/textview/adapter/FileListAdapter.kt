@@ -9,7 +9,7 @@ import android.widget.TextView
 import java.io.File
 import java.util.*
 
-class FileListAdapter(val activity: Activity) : BaseAdapter(){
+class FileListAdapter(val activity: Activity) : BaseAdapter() {
 
     val empty = arrayOf<File>()
 
@@ -24,17 +24,17 @@ class FileListAdapter(val activity: Activity) : BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
         val f = getItem(position)
         val v = activity.getLayoutInflater().inflate(android.R.layout.simple_list_item_1, null) as TextView
-        v.setText((if(f.isDirectory()) "D:" else "") + f.getName())
+        v.setText((if (f.isDirectory()) "D:" else "") + f.getName())
         return v
     }
 
     fun getDirectory() = currentDir
 
     fun setDirectory(dir: File) {
-        try{
+        try {
             currentDir = dir
             currentFiles = dir.listFiles() ?: empty
-            Arrays.sort(currentFiles, {(f1,f2) ->
+            Arrays.sort(currentFiles, {(f1, f2) ->
                 when {
                     f1.isDirectory() && !f2.isDirectory() -> -1
                     !f1.isDirectory() && f2.isDirectory() -> 1
@@ -42,11 +42,10 @@ class FileListAdapter(val activity: Activity) : BaseAdapter(){
                 }
             })
             notifyDataSetChanged()
-        }catch(e:Exception){
+        } catch(e: Exception) {
 
         }
     }
-
 
 
     override fun getItem(position: Int) = currentFiles[position]

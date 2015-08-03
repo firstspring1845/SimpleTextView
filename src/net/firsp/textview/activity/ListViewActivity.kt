@@ -9,7 +9,7 @@ import android.widget.ListView
 import net.firsp.textview.R
 import net.firsp.textview.Util
 
-abstract class ListViewActivity() : Activity(){
+abstract class ListViewActivity() : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super<Activity>.onCreate(savedInstanceState)
@@ -19,15 +19,15 @@ abstract class ListViewActivity() : Activity(){
         v.setFastScrollEnabled(true)
     }
 
-    override fun onWindowFocusChanged(has:Boolean) {
+    override fun onWindowFocusChanged(has: Boolean) {
         setBackgroundImage(PreferenceManager.getDefaultSharedPreferences(this).getString("background", ""))
     }
 
-    fun setBackgroundImage(path:String){
-        try{
+    fun setBackgroundImage(path: String) {
+        try {
             val v = findViewById(R.id.listViewLayout)
             v.setBackground(BitmapDrawable(Util.loadBackgroundBitmap(path, v)))
-        }catch(e:Exception){
+        } catch(e: Exception) {
         }
     }
 

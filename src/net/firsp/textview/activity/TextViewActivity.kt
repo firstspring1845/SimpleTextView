@@ -14,7 +14,7 @@ import java.io.FileInputStream
 import java.io.FileReader
 import java.io.InputStreamReader
 
-class TextViewActivity() : ListViewActivity(){
+class TextViewActivity() : ListViewActivity() {
 
     val adapter = TextViewAdapter(this)
 
@@ -26,19 +26,19 @@ class TextViewActivity() : ListViewActivity(){
         adapter.setText(readFile())
     }
 
-    fun readFile() : Array<String> {
-        return try{
+    fun readFile(): Array<String> {
+        return try {
             val encode = PreferenceManager.getDefaultSharedPreferences(this).getString("encode", "UTF-8")
-            BufferedReader(InputStreamReader(FileInputStream(getIntent().getStringExtra("file")), encode)).use{
+            BufferedReader(InputStreamReader(FileInputStream(getIntent().getStringExtra("file")), encode)).use {
                 val l = linkedListOf<String>()
                 var s = it.readLine()
-                while(s != null){
+                while (s != null) {
                     l.add(s)
                     s = it.readLine()
                 }
                 l.toArray(arrayOf<String>())
             }
-        }catch(e:Exception){
+        } catch(e: Exception) {
             arrayOf("Error:Reading File")
         }
     }

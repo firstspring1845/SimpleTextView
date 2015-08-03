@@ -7,11 +7,11 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import java.io.File
 
-class TextViewAdapter(val activity: Activity) : BaseAdapter(){
+class TextViewAdapter(val activity: Activity) : BaseAdapter() {
 
-    var data = Array<String>(0, {""})
+    var data = Array<String>(0, { "" })
 
-    fun setText(arr: Array<String>){
+    fun setText(arr: Array<String>) {
         data = arr
         notifyDataSetChanged()
     }
