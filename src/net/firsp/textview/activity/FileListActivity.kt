@@ -17,6 +17,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
 import net.firsp.textview.R
+import net.firsp.textview.TextViewApp
 import net.firsp.textview.Util
 import net.firsp.textview.adapter.FileListAdapter
 import net.firsp.textview.dialog.FavDialog
@@ -106,19 +107,18 @@ class FileListActivity() : ListViewActivity(), AdapterView.OnItemClickListener, 
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        val e = PreferenceManager.getDefaultSharedPreferences(this).edit()
+        val a = getApplication() as TextViewApp
         if (item != null) {
             when (item.getGroupId()) {
                 0 -> when (item.getItemId()) {
-                    0 -> e.putString("encode", "UTF-8")
-                    1 -> e.putString("encode", "EUC_JP")
-                    2 -> e.putString("encode", "SJIS")
-                    3 -> e.putString("encode", "ISO2022JP")
+                    0 -> a.encoding = "UTF-8"
+                    1 -> a.encoding = "EUC_JP"
+                    2 -> a.encoding = "SJIS"
+                    3 -> a.encoding = "ISO2022JP"
                 }
                 1 -> FavDialog().show(getFragmentManager(), "Fav")
             }
         }
-        e.commit()
         return true
     }
 }

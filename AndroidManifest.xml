@@ -10,6 +10,7 @@
             android:targetSdkVersion="19"
         />
     <application
+        android:name=".TextViewApp"
         android:allowBackup="true"
         android:label="Simple Text Viewer"
         android:icon="@drawable/icon"
