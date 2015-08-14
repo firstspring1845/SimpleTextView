@@ -3,11 +3,10 @@ package net.firsp.textview.adapter
 import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.BaseAdapter
 import android.widget.TextView
 import java.io.File
-import java.util.*
+import java.util.Arrays
 
 class FileListAdapter(val activity: Activity) : BaseAdapter() {
 
@@ -25,6 +24,7 @@ class FileListAdapter(val activity: Activity) : BaseAdapter() {
         val f = getItem(position)
         val v = activity.getLayoutInflater().inflate(android.R.layout.simple_list_item_1, null) as TextView
         v.setText((if (f.isDirectory()) "D:" else "") + f.getName())
+
         return v
     }
 

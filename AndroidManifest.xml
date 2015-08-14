@@ -28,6 +28,10 @@
                 android:name=".activity.TextViewActivity"
                 android:label="TextView" >
         </activity>
+        <activity
+                android:name=".activity.SettingActivity"
+                android:label="SettingView">
+        </activity>
     </application>
 
 </manifest>

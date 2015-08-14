@@ -61,7 +61,7 @@ class FileListActivity() : ListViewActivity(), AdapterView.OnItemClickListener, 
                 adapter.setDirectory(p)
                 (findViewById(R.id.listView) as ListView).setSelection(0)
                 return true
-            }
+            } else System.exit(0)
         }
         return super<ListViewActivity>.onKeyDown(keyCode, event)
     }
@@ -75,6 +75,7 @@ class FileListActivity() : ListViewActivity(), AdapterView.OnItemClickListener, 
             ja.add(0, 2, 1, "ShiftJIS")
             ja.add(0, 3, 2, "ISO-2022-JP")
             menu.add(1, 0, 1, "Bookmark")
+            menu.add(2, 0, 1, "Setting")
         }
         return true
     }
@@ -90,6 +91,7 @@ class FileListActivity() : ListViewActivity(), AdapterView.OnItemClickListener, 
                     3 -> a.encoding = "ISO2022JP"
                 }
                 1 -> FavDialog().show(getFragmentManager(), "Fav")
+                2 -> startActivity(Intent(this, javaClass<SettingActivity>()))
             }
         }
         return true
